@@ -1,0 +1,30 @@
+<div class="container">
+    <h2>User Gists</h2>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Gist ID</th>
+          <th>Description</th>
+          <th>Files</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let gist of gists">
+          <td>{{ gist.id }}</td>
+          <td>{{ gist.description }}</td>
+          <td>
+            <ul>
+              <li *ngFor="let file of gist.files">{{ file.filename }}</li>
+            </ul>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    
+    <div>
+      <button class="btn btn-primary" (click)="onPageChange(currentPage - 1)" [disabled]="currentPage === 1">Previous</button>
+      <span>Page {{ currentPage }}</span>
+      <button class="btn btn-primary" (click)="onPageChange(currentPage + 1)" [disabled]="gists.length < pageSize">Next</button>
+    </div>
+  </div>
+  

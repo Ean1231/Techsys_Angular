@@ -1,0 +1,21 @@
+<table class="table">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Language</th>
+        <th>Stars</th>
+        <th>Details</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let repo of repos">
+        <td>{{ repo.name }}</td>
+        <td>{{ repo.description }}</td>
+        <td>{{ repo.language }}</td>
+        <td>{{ repo.stargazers_count }}</td>
+        <td><a [routerLink]="['/', username, 'repos', repo.name]">View Details</a></td>
+      </tr>
+    </tbody>
+  </table>
+  

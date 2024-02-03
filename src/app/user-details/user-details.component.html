@@ -1,0 +1,17 @@
+<div class="container">
+    <div class="user-details">
+      <div class="user-avatar">
+        <img [src]="userData?.avatar_url" alt="User Avatar" width="100" height="100">
+      </div>
+      <div class="user-info">
+        <h2>{{ userData?.login }}</h2>
+        <p>{{ userData?.name }}</p>
+        <p>{{ userData?.bio }}</p>
+        <p>Followers: {{ userData?.followers }} <a [routerLink]="['/', userData?.login, 'followers']">View Followers</a></p>
+        <p>Following: {{ userData?.following }} <a [routerLink]="['/', userData?.login, 'following']">View Following</a></p>
+        <p>Repositories: {{ userData?.public_repos }} <a [routerLink]="['/', userData?.login, 'repos']">View Repositories</a></p>
+        <p>Gists: {{ userData?.public_gists }} <a [routerLink]="['/', userData?.login, 'gists']">View Gists</a></p>
+      </div>
+    </div>
+  </div>
+  

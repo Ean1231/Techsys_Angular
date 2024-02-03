@@ -1,0 +1,33 @@
+<div class="container">
+    <h2>Repositories for {{ username }}</h2>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Repository Name</th>
+          <th>Description</th>
+          <th>Language</th>
+          <th>Stars</th>
+          <th>Forks</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let repo of repositories">
+          <td>{{ repo.name }}</td>
+          <td>{{ repo.description }}</td>
+          <td>{{ repo.language }}</td>
+          <td>{{ repo.stargazers_count }}</td>
+          <td>{{ repo.forks_count }}</td>
+          <td>
+            <a [routerLink]="['/', username, 'repo', repo.name]">View Details</a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  
+    <div>
+      <button class="btn btn-primary" (click)="onPageChange(currentPage - 1)" [disabled]="currentPage === 1">Previous</button>
+      <span>Page {{ currentPage }}</span>
+      <button class="btn btn-primary" (click)="onPageChange(currentPage + 1)" [disabled]="repositories.length < pageSize">Next</button>
+    </div>
+  </div>
+  

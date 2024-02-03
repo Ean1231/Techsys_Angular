@@ -1,0 +1,23 @@
+<!-- following.component.html -->
+<div class="container">
+    <h2>Following</h2>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Username</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let user of following">
+          <td>{{ user.login }}</td>
+        </tr>
+      </tbody>
+    </table>
+  
+    <div>
+      <button class="btn btn-primary" (click)="onPageChange(currentPage - 1)" [disabled]="currentPage === 1">Previous</button>
+      <span>Page {{ currentPage }}</span>
+      <button class="btn btn-primary" (click)="onPageChange(currentPage + 1)" [disabled]="following.length < pageSize">Next</button>
+    </div>
+  </div>
+  

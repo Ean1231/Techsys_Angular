@@ -1,0 +1,23 @@
+<div class="container mt-4">
+    <h2>Repository Details</h2>
+  
+    <div *ngIf="repositoryDetails">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">{{ repositoryDetails.name }}</h5>
+          <p class="card-text">{{ repositoryDetails.description }}</p>
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item"><strong>Owner:</strong> {{ repositoryDetails.owner.login }}</li>
+            <li class="list-group-item"><strong>Stars:</strong> {{ repositoryDetails.stargazers_count }}</li>
+            <li class="list-group-item"><strong>Forks:</strong> {{ repositoryDetails.forks_count }}</li>
+            <li class="list-group-item"><strong>Language:</strong> {{ repositoryDetails.language }}</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  
+    <div *ngIf="!repositoryDetails">
+      <p>Loading repository details...</p>
+    </div>
+  </div>
+  
