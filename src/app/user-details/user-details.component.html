@@ -1,17 +1,41 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <div class="container-fluid d-flex justify-content-between align-items-center">
+    <button class="btn btn-primary" (click)="goBack()">Back</button>
+    <h2 style="color: aliceblue;" class="text-center m-0"></h2>
+  </div>
+</nav>
+
 <div class="container">
-    <div class="user-details">
-      <div class="user-avatar">
-        <img [src]="userData?.avatar_url" alt="User Avatar" width="100" height="100">
-      </div>
-      <div class="user-info">
-        <h2>{{ userData?.login }}</h2>
-        <p>{{ userData?.name }}</p>
-        <p>{{ userData?.bio }}</p>
-        <p>Followers: {{ userData?.followers }} <a [routerLink]="['/', userData?.login, 'followers']">View Followers</a></p>
-        <p>Following: {{ userData?.following }} <a [routerLink]="['/', userData?.login, 'following']">View Following</a></p>
-        <p>Repositories: {{ userData?.public_repos }} <a [routerLink]="['/', userData?.login, 'repos']">View Repositories</a></p>
-        <p>Gists: {{ userData?.public_gists }} <a [routerLink]="['/', userData?.login, 'gists']">View Gists</a></p>
+  <div class="user-details">
+    <div class="user-avatar">
+      <img [src]="userData?.avatar_url" alt="User Avatar" width="100" height="100">
+    </div>
+    <div class="user-info">
+      <h2 class="text-center">{{ userData?.login }}</h2>
+      <p>{{ userData?.name }}</p>
+      <p class="bio">{{ userData?.bio }}</p>
+      <div class="user-stats">
+        <div class="stat">
+          <p class="label">Followers:</p>
+          <p class="count">{{ userData?.followers }}</p>
+          <a [routerLink]="['/', userData?.login, 'followers']" class="view-link">View Followers</a>
+        </div>
+        <div class="stat">
+          <p class="label">Following:</p>
+          <p class="count">{{ userData?.following }}</p>
+          <a [routerLink]="['/', userData?.login, 'following']" class="view-link">View Following</a>
+        </div>
+        <div class="stat">
+          <p class="label">Gists:</p>
+          <p class="count">{{ userData?.public_gists }}</p>
+          <a [routerLink]="['/', userData?.login, 'gists']" class="view-link">View Gists</a>
+        </div>
+        <div class="stat">
+          <p class="label">Repositories:</p>
+          <p class="count">{{ userData?.public_repos }}</p>
+          <a [routerLink]="['/', userData?.login, 'repos']" class="view-link">View Repositories</a>
+        </div>
       </div>
     </div>
   </div>
-  
+</div>

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { GithubApiService } from '../github-api.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-gists',
@@ -13,7 +13,7 @@ export class GistsComponent implements OnInit {
   pageSize = 10;
   username: string | undefined;
 
-  constructor(private githubApiService: GithubApiService, private route: ActivatedRoute) {}
+  constructor(private githubApiService: GithubApiService, private route: ActivatedRoute, private router: Router) {}
 
   ngOnInit() {
     this.route.paramMap.subscribe(params => {
@@ -30,6 +30,7 @@ export class GistsComponent implements OnInit {
     if (this.username) {
       this.githubApiService.getGists(this.username, this.currentPage, this.pageSize).subscribe((data: any) => {
         this.gists = data;
+        console.log(data)
       }, error => {
         console.error('Error fetching gists:', error);
       });
@@ -39,5 +40,10 @@ export class GistsComponent implements OnInit {
   onPageChange(page: number) {
     this.currentPage = page;
     this.loadGists();
+  }
+
+  goBack() {
+    // Navigate back to UserDetailsComponent with selected user's information
+    this.router.navigate(['/user-details', this.username]);
   }
 }

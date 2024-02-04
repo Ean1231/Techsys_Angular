@@ -14,6 +14,7 @@ import { FollowersComponent } from './followers/followers.component';
 import { FollowingComponent } from './following/following.component';
 import { GistsComponent } from './gists/gists.component';
 import { RepoDetailsComponent } from './repo-details/repo-details.component';
+import { PaginationComponent } from './pagination/pagination.component';
 
 
 @NgModule({
@@ -26,7 +27,8 @@ import { RepoDetailsComponent } from './repo-details/repo-details.component';
     FollowersComponent,
     FollowingComponent,
     GistsComponent,
-    RepoDetailsComponent
+    RepoDetailsComponent,
+    PaginationComponent
   ],
   imports: [
     BrowserModule,

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { GithubApiService } from '../github-api.service';
 import { ActivatedRoute, ParamMap } from '@angular/router';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-followers',
@@ -13,8 +14,9 @@ export class FollowersComponent implements OnInit {
   currentPage = 1;
   pageSize = 10;
   totalFollowers = 0;
+  
 
-  constructor(private githubApiService: GithubApiService, private route: ActivatedRoute) {}
+  constructor(private githubApiService: GithubApiService, private route: ActivatedRoute, private router: Router) {}
 
   ngOnInit() {
     this.route.paramMap.subscribe((params: ParamMap) => {
@@ -64,6 +66,11 @@ export class FollowersComponent implements OnInit {
       this.currentPage--;
     }
   }
+  goBack() {
+    // Navigate back to UserDetailsComponent with selected user's information
+    this.router.navigate(['/user-details', this.username]);
+  }
+  
 
   nextPage() {
     if (this.currentPage < this.totalPages) {

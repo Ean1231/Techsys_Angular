@@ -20,35 +20,35 @@ export class AppComponent {
   constructor(private githubApiService: GithubApiService, private router: Router) {}
 
   ngOnInit() {
-    this.loadUsers();
+    // this.loadUsers();
     // this. loadUsersS();
   }
 
-  loadUsers(query: string = '', page: number = this.page) {
-    if (query.trim() !== '') {
-      this.githubApiService.searchUsers(query, page, this.perPage).subscribe((response: any) => {
-        this.users = response.items;
-        this.total = response.total_count;
-      }, error => {
-        console.error('There was an error fetching the users:', error);
-      });
-    } else {
-      // Handle empty query scenario, e.g., reset the user list or display a message
-      console.log('Search query is empty. Please provide a valid query.');
-      this.users = []; // Reset users or handle as appropriate
-    }
-  }
+  // loadUsers(query: string = '', page: number = this.page) {
+  //   if (query.trim() !== '') {
+  //     this.githubApiService.searchUsers(query, page, this.perPage).subscribe((response: any) => {
+  //       this.users = response.items;
+  //       this.total = response.total_count;
+  //     }, error => {
+  //       console.error('There was an error fetching the users:', error);
+  //     });
+  //   } else {
+  //     // Handle empty query scenario, e.g., reset the user list or display a message
+  //     console.log('Search query is empty. Please provide a valid query.');
+  //     this.users = []; // Reset users or handle as appropriate
+  //   }
+  // }
 
-  loadUsersS() {
-    this.githubApiService.getUsers(this.currentPage, this.pageSize).subscribe((data: any) => {
-      this.users = data.items;
-      // Assuming the API response includes an "items" property with user data
-    });
-  }
+  // loadUsersS() {
+  //   this.githubApiService.getUsers(this.currentPage, this.pageSize).subscribe((data: any) => {
+  //     this.users = data.items;
+  //     // Assuming the API response includes an "items" property with user data
+  //   });
+  // }
   
   onSearch(query: string) {
     if (query && query.trim()) {
-      this.loadUsers(query.trim());
+      // this.loadUsers(query.trim());
     } else {
       console.log('Search query is empty. Please provide a valid query.');
     }
@@ -68,6 +68,6 @@ export class AppComponent {
   
   onPageChange(page: number) {
     this.page = page;
-    this.loadUsers(this.searchQuery, page);
+    // this.loadUsers(this.searchQuery, page);
   }
 }

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { GithubApiService } from 'src/app/github-api.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-user-details',
@@ -12,7 +13,8 @@ export class UserDetailsComponent implements OnInit {
 
   constructor(
     private githubApiService: GithubApiService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private router: Router
   ) {}
 
   ngOnInit() {
@@ -23,5 +25,10 @@ export class UserDetailsComponent implements OnInit {
     this.githubApiService.getUserData(username).subscribe((userData) => {
       this.userData = userData;
     });
+  }
+  
+  goBack() {
+    // Navigate back to UserDetailsComponent with selected user's information
+    this.router.navigate(['/user-list']);
   }
 }

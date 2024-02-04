@@ -16,8 +16,9 @@ const routes: Routes = [
   { path: ':username/followers', component: FollowersComponent},
   { path: ':username/following', component: FollowingComponent },
   { path: ':username/gists', component: GistsComponent },
-  { path: ':username/repo/:repoName', component: RepoDetailsComponent }
-
+  { path: ':username/repo/:repoName', component: RepoDetailsComponent },
+  { path: 'user-list', component: UserListComponent },
+  { path: 'repositories', component: RepositoriesComponent },
 
 ];
 

@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+
 @Component({
   selector: 'app-repo-details',
   templateUrl: './repo-details.component.html',
@@ -13,7 +14,8 @@ export class RepoDetailsComponent {
 
   constructor(
     private route: ActivatedRoute,
-    private httpClient: HttpClient 
+    private httpClient: HttpClient,
+    private router: Router
   ) {}
 
   ngOnInit() {
@@ -38,5 +40,12 @@ export class RepoDetailsComponent {
         }
       );
     }
+  }
+
+  goBack() {
+    // Navigate back to the "repositories" route with user's information as query parameters
+    this.router.navigate(['/repositories'], {
+      queryParams: { username: this.username }
+    });
   }
 }

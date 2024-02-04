@@ -1,0 +1,11 @@
+<nav aria-label="Page navigation example">
+    <ul class="pagination">
+      <li class="page-item" [class.disabled]="currentPage === 1">
+        <a class="page-link" href="#" aria-label="Previous" (click)="changePage(currentPage - 1); $event.preventDefault()">&laquo;</a>
+      </li>
+      <li class="page-item" [class.disabled]="currentPage === totalPages()">
+        <a class="page-link" href="#" aria-label="Next" (click)="changePage(currentPage + 1); $event.preventDefault()">&raquo;</a>
+      </li>
+    </ul>
+  </nav>
+  

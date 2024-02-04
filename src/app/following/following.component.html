@@ -1,23 +1,26 @@
-<!-- following.component.html -->
 <div class="container">
-    <h2>Following</h2>
-    <table class="table">
-      <thead>
-        <tr>
-          <th>Username</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let user of following">
-          <td>{{ user.login }}</td>
-        </tr>
-      </tbody>
-    </table>
-  
-    <div>
-      <button class="btn btn-primary" (click)="onPageChange(currentPage - 1)" [disabled]="currentPage === 1">Previous</button>
-      <span>Page {{ currentPage }}</span>
-      <button class="btn btn-primary" (click)="onPageChange(currentPage + 1)" [disabled]="following.length < pageSize">Next</button>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid d-flex justify-content-between align-items-center">
+      <button class="btn btn-primary" (click)="goBack()">Back</button>
+      <h2 style="color: aliceblue;" class="text-center m-0"></h2>
     </div>
+  </nav>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Username</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let user of following">
+        <td>{{ user.login }}</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="text-center">
+    <button class="btn btn-primary mx-2" (click)="onPageChange(currentPage - 1)" [disabled]="currentPage === 1">Prev</button>
+    <span class="page-number">Page {{ currentPage }}</span>
+    <button class="btn btn-primary mx-2" (click)="onPageChange(currentPage + 1)" [disabled]="following.length < pageSize">Next</button>
   </div>
-  
+</div>
