@@ -15,6 +15,7 @@ import { FollowingComponent } from './following/following.component';
 import { GistsComponent } from './gists/gists.component';
 import { RepoDetailsComponent } from './repo-details/repo-details.component';
 import { PaginationComponent } from './pagination/pagination.component';
+import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 
 
 @NgModule({
@@ -38,7 +39,7 @@ import { PaginationComponent } from './pagination/pagination.component';
     ReactiveFormsModule,
   ],
   exports: [FormsModule, ReactiveFormsModule], // Add this line
-  providers: [],
+  providers: [{provide: LocationStrategy, useClass: HashLocationStrategy}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

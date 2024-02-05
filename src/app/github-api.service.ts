@@ -12,7 +12,7 @@ export class GithubApiService {
   private apiUrl = 'https://api.github.com/search/users';
   private Url = 'https://api.github.com/users'
   private api = 'https://api.github.com/';
-  private accessToken = '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';
+  private accessToken = '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';
 
   
   // searchUsers(query: string, page = 1) {
