@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { GithubApiService } from '../github-api.service';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { Router } from '@angular/router';
+import { GithubApiService } from '../github-api.service';
 
 @Component({
   selector: 'app-followers',
@@ -9,12 +9,11 @@ import { Router } from '@angular/router';
   styleUrls: ['./followers.component.css']
 })
 export class FollowersComponent implements OnInit {
-  username: string = ''; 
+  username: string = '';
   followers: any[] = [];
   currentPage = 1;
   pageSize = 10;
   totalFollowers = 0;
-  
 
   constructor(private githubApiService: GithubApiService, private route: ActivatedRoute, private router: Router) {}
 
@@ -30,10 +29,13 @@ export class FollowersComponent implements OnInit {
 
   loadFollowers() {
     if (this.username) {
+      // Increase the pageSize to fetch more data
+      const largerPageSize = 20; // You can adjust this value
       this.githubApiService.getFollowers(this.username).subscribe(
         (followers: any[]) => {
-          this.followers = followers;
-          this.totalFollowers = followers.length;
+          // Append the newly fetched followers to the existing list
+          this.followers = this.followers.concat(followers);
+          this.totalFollowers = this.followers.length;
         },
         (error: any) => {
           console.error('Error fetching user followers:', error);
@@ -52,29 +54,37 @@ export class FollowersComponent implements OnInit {
   }
 
   get pages() {
-    return Array.from({ length: this.totalPages }, (_, i) => i + 1);
+    const visiblePages = 5; // Adjust the number of visible page numbers as needed
+    const halfVisiblePages = Math.floor(visiblePages / 2);
+    const startPage = Math.max(1, this.currentPage - halfVisiblePages);
+    const endPage = Math.min(this.totalPages, startPage + visiblePages - 1);
+
+    return Array.from({ length: endPage - startPage + 1 }, (_, i) => i + startPage);
   }
 
   goToPage(page: number) {
     if (page >= 1 && page <= this.totalPages) {
       this.currentPage = page;
+      this.loadFollowers(); // Load followers with the updated page
     }
   }
 
   previousPage() {
     if (this.currentPage > 1) {
       this.currentPage--;
+      this.loadFollowers();
     }
   }
+
   goBack() {
     // Navigate back to UserDetailsComponent with selected user's information
     this.router.navigate(['/user-details', this.username]);
   }
-  
 
   nextPage() {
     if (this.currentPage < this.totalPages) {
       this.currentPage++;
+      this.loadFollowers();
     }
   }
 }

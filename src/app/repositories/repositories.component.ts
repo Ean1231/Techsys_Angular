@@ -11,10 +11,9 @@ export class RepositoriesComponent implements OnInit {
   repositories: any[] = [];
   currentPage = 1;
   pageSize = 10;
+  totalItems = 0;
   totalPages = 1; // Initialize to 1, update it when fetching data
   username: string | null = null;
-  followers: any[] = [];
-  totalFollowers = 0;
 
   constructor(
     private githubApiService: GithubApiService,
@@ -29,30 +28,30 @@ export class RepositoriesComponent implements OnInit {
     });
   }
 
-  loadRepositories() {
-    if (this.username) {
-      // Increase the pageSize to fetch more data
-      const largerPageSize = 20; // You can adjust this value
-      this.githubApiService.getUserRepositories(this.username, this.currentPage, largerPageSize).subscribe(
-        (data: any) => {
-          this.repositories = data;
-          if (data.total_count && largerPageSize) {
-            this.totalPages = Math.ceil(data.total_count / largerPageSize);
-          } else {
-            this.totalPages = 4 // Set a default value in case data is missing
-          }
-          console.log('totalPages:', this.totalPages);
-          console.log('currentPage:', this.currentPage);
-        },
-        error => {
-          console.error('Error fetching repositories:', error);
-        }
-      );
-    }
+loadRepositories() {
+  if (this.username) {
+    // Increase the pageSize to fetch more data
+    const largerPageSize = 20; // You can adjust this value
+    this.githubApiService.getUserRepositories(this.username, this.currentPage, largerPageSize).subscribe(
+      (data: any) => {
+        // Replace the existing repositories with the newly fetched data
+        this.repositories = data;
+        // Retrieve the total number of repositories from the API response
+        this.totalItems = data.length;
+        // Calculate the total pages based on the total number of repositories
+        this.totalPages = Math.ceil(this.totalItems / this.pageSize);
+        console.log('totalPages:', this.totalPages);
+        console.log('currentPage:', this.currentPage);
+      },
+      error => {
+        console.error('Error fetching repositories:', error);
+      }
+    );
   }
-  
-  
+}
 
+  
+  
   previousPage() {
     if (this.currentPage > 1) {
       this.currentPage--;
@@ -72,15 +71,24 @@ export class RepositoriesComponent implements OnInit {
     return this.repositories.slice(startIndex, startIndex + this.pageSize);
   }
 
-  // Assuming you have a similar method for followers
-  // get pagedFollowers() {
-  //   const startIndex = (this.currentPage - 1) * this.pageSize;
-  //   return this.followers.slice(startIndex, startIndex + this.pageSize);
-  // }
-
   get pages() {
-    return Array.from({ length: this.totalPages }, (_, i) => i + 1);
+    const visiblePages = 3; // Adjust the number of visible page numbers as needed
+    const halfVisiblePages = Math.floor(visiblePages / 2);
+    const startPage = Math.max(1, this.currentPage - halfVisiblePages);
+    const endPage = Math.min(this.totalPages, startPage + visiblePages - 1);
+  
+    // Ensure that there are always 5 pages visible if possible
+    if (endPage - startPage + 1 < visiblePages) {
+      const diff = visiblePages - (endPage - startPage + 1);
+      if (startPage - diff > 0) {
+        return Array.from({ length: visiblePages }, (_, i) => i + startPage - diff);
+      }
+      return Array.from({ length: visiblePages }, (_, i) => i + startPage);
+    }
+  
+    return Array.from({ length: endPage - startPage + 1 }, (_, i) => i + startPage);
   }
+  
 
   goToPage(page: number) {
     if (page >= 1 && page <= this.totalPages) {
