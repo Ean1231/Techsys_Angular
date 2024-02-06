@@ -9,7 +9,7 @@ export class GithubApiService {
   userData: any;
   constructor(private http: HttpClient) { }
   private Url = 'https://api.github.com/users'
-  private accessToken = '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';
+  // private accessToken = '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';
 
   
 
@@ -46,13 +46,13 @@ export class GithubApiService {
   }
   getUsers(query: string, page: number): Observable<any> {
     // Define the headers with your access token
-    const headers = {
-      Authorization: `token ${this.accessToken}`
-    };
+    // const headers = {
+    //   Authorization: `token ${this.accessToken}`
+    // };
   
     // Convert Axios promise to an observable and include the headers
     return from(
-      axios.get(`https://api.github.com/search/users?q=${query}&page=${page}&per_page=10`, { headers })
+      axios.get(`https://api.github.com/search/users?q=${query}&page=${page}&per_page=10`)
         .catch(error => {
           console.log('Axios request failed:', error.response);
         })
