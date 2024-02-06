@@ -12,16 +12,9 @@ export class GithubApiService {
   private apiUrl = 'https://api.github.com/search/users';
   private Url = 'https://api.github.com/users'
   private api = 'https://api.github.com/';
-  private accessToken = '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';
+  private accessToken = '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';
 
   
-  // searchUsers(query: string, page = 1) {
-  //    return this.http.get(`${this.baseUrl}/search/users?q=${query}&page=${page}&per_page=10`);
-  // }
-  // searchUsers(query: string, page: number = 1, perPage: number = 10) {
-  //   const url = `https://api.github.com/search/users?q=${encodeURIComponent(query)}&page=${page}&per_page=${perPage}`;
-  //   return this.http.get(url);
-  // }
 
   getUserDetails(username: string): Observable<any> {
     return this.http.get(`https://docs.github.com/users/${username}`);
