@@ -49,12 +49,12 @@ export class GithubApiService {
   
   getUsers(query: string, page: number): Observable<any> {
     // Define the headers with your access token
-    const headers = {
-      Authorization: `token ${environment.githubToken}`
-    };
+    // const headers = {
+    //   Authorization: `token ${environment.githubToken}`
+    // };
   
     // Convert Axios promise to an observable and include the headers in the request
-    return from(axios.get(`https://api.github.com/search/users?q=${query}&page=${page}&per_page=10`, { headers })
+    return from(axios.get(`https://api.github.com/search/users?q=${query}&page=${page}&per_page=10`)
       .catch(error => {
         console.log('Axios request failed:', error.response);
         // Optionally, you might want to throw an error here to handle it in the subscription
