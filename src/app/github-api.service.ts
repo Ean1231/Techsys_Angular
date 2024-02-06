@@ -9,7 +9,7 @@ export class GithubApiService {
   userData: any;
   constructor(private http: HttpClient) { }
   private Url = 'https://api.github.com/users'
-  private accessToken = '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';
+  private accessToken = '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';
 
   
 
