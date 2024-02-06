@@ -7,26 +7,16 @@ import axios from 'axios';
 })
 export class GithubApiService {
   userData: any;
-  private baseUrl = "https://api.github.com"
   constructor(private http: HttpClient) { }
-  private apiUrl = 'https://api.github.com/search/users';
   private Url = 'https://api.github.com/users'
-  private api = 'https://api.github.com/';
   private accessToken = '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';
 
   
 
-  getUserDetails(username: string): Observable<any> {
-    return this.http.get(`https://docs.github.com/users/${username}`);
-  }
   getUserData(username: string): Observable<any> {
-    // Fetch user data from your API
     return this.http.get(`https://api.github.com/users/${username}`);
   }
-  getUserRepos(username: string, page: number, perPage: number): Observable<any> {
-    const url = `https://api.github.com/users/${username}/repos?page=${page}&per_page=${perPage}`;
-    return this.http.get(url);
-  }
+
   getFollowers(username: string): Observable<any[]> {
     const url = `https://api.github.com/users/${username}/followers`;
     return this.http.get<any[]>(url);
@@ -38,10 +28,6 @@ export class GithubApiService {
   
   getGists(username: string, page: number, perPage: number): Observable<any> {
     const url = `https://api.github.com/users/${username}/gists?page=${page}&per_page=${perPage}`;
-    return this.http.get(url);
-  }
-  getUsersS(page: number, perPage: number): Observable<any> {
-    const url = `https://api.github.com/users?page=${page}&per_page=${perPage}`;
     return this.http.get(url);
   }
 
